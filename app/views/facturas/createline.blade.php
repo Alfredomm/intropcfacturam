@@ -34,6 +34,8 @@
 			<p>
 				Ha habido algunos errores:
 			</p>
+			
+			@if( $errors->any() ) <br/> <div> <h5> {{ HTML::linkRoute('empresas.index', $errors->first())  }} </h5> </div> @endif
 
 			<ul>
 				{{ $errors->first('referncia', '<li>:message</li>') }}

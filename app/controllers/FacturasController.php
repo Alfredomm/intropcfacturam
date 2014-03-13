@@ -125,8 +125,16 @@ class FacturasController extends BaseController {
 		}
 
 		$empresas = Empresa::orderBy('id', 'asc')->take(2)->get();
-		$empresa = $empresas[0];
-		$empresa2 = $empresas[1];
+		if( count($empresas) < 1 ) {
+			$mensaje = 'Añade los datos de tu empresa antes de crear una factura';
+        	return Redirect::back()->withErrors($mensaje);
+		} else if( count($empresas) == 1 ) {
+			$empresa = $empresas[0];
+			$empresa2 = null;
+		} else {
+			$empresa2 = $empresas[1];
+		}
+
 		$ajustes = Ajuste::find(1);
 		$prevUrl = URL::previous();
 
