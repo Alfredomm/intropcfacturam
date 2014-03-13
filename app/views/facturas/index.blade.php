@@ -11,6 +11,8 @@
 
 	<a class="btn btn-primary boto1" href="{{ route('facturas.createtipo', $tipo) }}">Crear {{ $tipo }}</a>
 
+	@if( $errors->any() ) <br/> <div class="meserror subtitol1"> <h5> {{ HTML::linkRoute('empresas.index', $errors->first())  }} </h5> </div> @endif
+
 	<div class="campobusquedaf">
 
 		<div class="row">
@@ -114,12 +116,9 @@
 			<table class="table table-hover tabla_lista_facturas">
 				<thead>
 					<tr>
-						@if( ($active == 'borradores') )
-						@else
-							<td>
-								Numero
-							</td>
-						@endif
+						<td>
+							Numero
+						</td>
 						<td>
 							Cliente
 						</td>
@@ -150,7 +149,7 @@
 									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'VE '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 								</td>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -159,7 +158,7 @@
 									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									<a class="btn btn-primary" href="{{ route('facturas.convert', $factura->id) }}">Convertir a factura</a>
 								</td>
 							</tr>
@@ -170,7 +169,10 @@
 
 							<tr>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									
+								</td>
+								<td>
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -179,7 +181,7 @@
 									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									<a class="btn btn-primary " href="{{ route('facturas.convert', $factura->id) }}">Convertir a factura</a>
 									{{ Form::open(array( 'route' => 'facturas.destroy', 'method' => 'delete', 'class' => 'form_lista_clientes' )) }}
 										{{ Form::token() }}
@@ -199,7 +201,7 @@
 									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'VE '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 								</td>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -213,11 +215,11 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									@if( $factura->existe_rectificativa == 0 )
-										<a class="btn btn-default" href="{{ route('facturas.convertRectificativa', $factura->id) }}">Factura rectificativa</a>
+										<a class="btn btn-default" href="{{ route('facturas.convertRectificativa', $factura->id) }}">Rectificativa</a>
 									@else
-										<a class="btn btn-default" onclick='return confirm("Ya existe una factura rectificativa de esta factura de venta, seguro que quieres crear otra?")' href="{{ route('facturas.convertRectificativa', $factura->id) }}">Factura rectificativa</a>
+										<a class="btn btn-default" onclick='return confirm("Ya existe una factura rectificativa de esta factura de venta, seguro que quieres crear otra?")' href="{{ route('facturas.convertRectificativa', $factura->id) }}">Rectificativa</a>
 									@endif
 								</td>
 							</tr>
@@ -274,7 +276,7 @@
 									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'AL '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 								</td>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -283,7 +285,7 @@
 									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									<a class="btn btn-primary " href="{{ route('facturas.convert', $factura->id) }}">Convertir a factura</a>
 								</td>
 							</tr>
@@ -294,7 +296,7 @@
 						
 							<tr>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -303,7 +305,7 @@
 									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									<a class="btn btn-primary " href="{{ route('facturas.convert', $factura->id) }}">Convertir a factura</a>
 									{{ Form::open(array( 'route' => 'facturas.destroy', 'method' => 'delete', 'class' => 'form_lista_clientes' )) }}
 										{{ Form::token() }}
@@ -323,7 +325,7 @@
 									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'VE '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 								</td>
 								<td>
-									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 								</td>
 								<td>
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -337,11 +339,11 @@
 									@endif
 								</td>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+									
 									@if( $factura->existe_rectificativa == 0 )
-										<a class="btn btn-default" href="{{ route('facturas.convertRectificativa', $factura->id) }}">Factura rectificativa</a>
+										<a class="btn btn-default" href="{{ route('facturas.convertRectificativa', $factura->id) }}">Rectificativa</a>
 									@else
-										<a class="btn btn-default" onclick='return confirm("Ya existe una factura rectificativa de esta factura de alquiler, seguro que quieres crear otra?")' href="{{ route('facturas.convertRectificativa', $factura->id) }}">Factura rectificativa</a>
+										<a class="btn btn-default" onclick='return confirm("Ya existe una factura rectificativa de esta factura de alquiler, seguro que quieres crear otra?")' href="{{ route('facturas.convertRectificativa', $factura->id) }}">Rectificativa</a>
 									@endif
 								</td>
 							</tr>
@@ -397,7 +399,7 @@
 										<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'RE '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 									</td>
 									<td>
-										{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 15)), $factura->id, array( 'target' => '_blank' )) }}
+										{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}
 									</td>
 									<td>
 										{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
@@ -409,9 +411,6 @@
 										@if( strlen($factura->fecha_pagado) == 8 )
 											<i class="glyphicon glyphicon-ok"></i></a>
 										@endif
-									</td>
-									<td>
-										<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}"><i class="glyphicon glyphicon-pencil"></i></a>
 									</td>
 								</tr>
 
