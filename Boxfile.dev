@@ -25,7 +25,7 @@ web1:
   after_build:
     - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-source"
   before_deploy:
-    - "php artisan migrate:install"
+    - "php artisan migrate:rollback"
     - "php artisan migrate"
     - "php artisan db:seed"
   after_deploy:
