@@ -1,0 +1,509 @@
+body{
+	width: 21cm;
+	height: 29.7cm;
+	margin: -1.19cm -1.22cm -0.95cm -1.20cm;
+	padding: 0;
+	font-family: 'Helvetica';
+	font-size: 13px;
+	letter-spacing: 0.8px;
+}
+
+.wrapper{
+	position: absolute;
+	top: 0;
+	left: 0.5cm;
+	font-size: 13px;
+}
+
+/*********************************
+
+default margins: 1.19cm 1.22cm 0.95cm 1.20cm;
+
+*********************************/
+
+/******************************************************
+*** = logo
+******************************************************/
+
+.logo{
+	width: 7.48cm;
+	height: 1.48cm;
+	position: absolute;
+	top: 2.45cm;
+	left: 0.77cm;
+}
+
+/******************************************************
+*** = end of logo
+******************************************************/
+
+/******************************************************
+*** = leyenda vertical
+******************************************************/
+
+.vertical{
+	position: absolute;
+	top: 11.3cm;
+	left: 0.2cm;
+	height: 14.37cm;
+}
+
+/******************************************************
+*** = end of leyenda vertical
+******************************************************/
+
+/******************************************************
+*** = datos de la empresa
+******************************************************/
+
+.datos-empresa{
+	width: 7.48cm;
+	height: 4.6cm;
+	position: absolute;
+	overflow: hidden;
+	top: 4.2cm;
+	left: 0.77cm;
+	text-align: center;
+	font-size: 12.5px;
+}
+
+/******************************************************
+*** = end of datos de la empresa
+******************************************************/
+
+/******************************************************
+*** = resumen de la factura (fecha y cliente)
+******************************************************/
+
+.resumen-cliente-fecha{
+	width: 9.56cm;
+	height: 0.45cm;
+	position: absolute;
+	top: 2.55cm;
+	right: 0.61cm;
+	border: 1px solid black;
+	font-size: 13px;
+	text-align: center;
+}
+
+.resumen-cliente-fecha td{
+	width: 2.9cm;
+	padding: 0;
+}
+
+.resumen-cliente-fecha-bajo{
+	width: 9.56cm;
+	height: 0.79cm;
+	position: absolute;
+	top: 3.1cm;
+	right: 0.61cm;
+	border: 1px solid black;
+	font-size: 13px;
+	text-align: center;
+}
+
+.resumen-cliente-fecha-bajo td{
+	width: 2.9cm;
+}
+
+.resumen-linea-cliente{
+	width: 0.025cm;
+	height: 1.4cm;
+	background-color: black;
+	position: absolute;
+	top: 2.55cm;
+	left: 13.4cm;
+}
+
+.resumen-linea-fecha{
+	width: 0.025cm;
+	height: 1.4cm;
+	background-color: black;
+	position: absolute;
+	top: 2.55cm;
+	left: 16.55cm;
+}
+
+/******************************************************
+*** = end of resumen factura (fecha y cliente)
+******************************************************/
+
+/******************************************************
+*** = datos de cliente
+******************************************************/
+
+.datos-cliente{
+	width: 9.56cm;
+	position: absolute;
+	right: 0.61cm;
+	top: 5.29cm;
+	height: 2.65cm;
+	border: 1px solid black;
+}
+
+.datos-cliente td{
+	text-align: center;
+}
+
+.datos-cliente tr > td:first-child{
+	text-align: left;
+	width: 3.5cm;
+	vertical-align: top;
+}
+
+/******************************************************
+*** = end of datos de cliente
+******************************************************/
+
+/******************************************************
+*** = linea de si es presupuesto o no
+******************************************************/
+
+.presupuesto{
+	width: 9.94cm;
+	height: 0.54cm;
+	position: absolute;
+	top: 8.9cm;
+	left: 1.58cm;
+	text-align: center;
+	font-weight: bold;
+	font-size: 14px;
+	text-transform: uppercase;	
+	border: 3px solid black;
+}
+
+/******************************************************
+*** = end of linea de si es presupuesto o no
+******************************************************/
+
+/******************************************************
+*** = cif de la empresa
+******************************************************/
+
+.cif{
+	width: 9.60cm;
+	position: absolute;
+	top: 10.34cm;
+	right: 0.61cm;
+	height: 0.6cm;
+	overflow: hidden;
+	border: 1px solid black;
+}
+
+.cif td{
+	vertical-align: center;
+	text-align: center;
+}
+
+.cif tr > td:first-child{
+	text-align: left;
+	width: 2cm;
+}
+
+/******************************************************
+*** = end of cif de la empresa
+******************************************************/
+
+.vertical-linea-ref{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 2.18cm;
+}
+
+.vertical-linea-descripcion{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 11.31cm;
+}
+
+.vertical-linea-ud{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 12.8cm;
+}
+
+.vertical-linea-dias{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 14.22cm;
+}
+
+.vertical-linea-precio{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 16.53cm;
+}
+
+.vertical-linea-dto{
+	width: 0.025cm;
+	height: 14.18cm;
+	background-color: black;
+	position: absolute;
+	top: 11.6cm;
+	left: 17.75cm;
+}
+
+/******************************************************
+*** = factura lineas
+******************************************************/
+
+.factura-lineas-container{
+	width: 19.06cm;
+	height: 14.15cm;
+	border: 1px solid black;
+	position: absolute;
+	top: 11.6cm;
+	left: 0.76cm;
+	padding: 0;
+	font-size: 14px;
+	overflow: hidden;
+	font-size: 12px;
+}
+
+.factura-lineas-tabla-head{
+	margin-top: -0.05cm;
+	text-align: center;
+	margin-left: -0.5cm;
+}
+
+.factura-lineas-tabla-body{
+	text-align: left;
+	width: 19.06cm;
+}
+
+.factura-lineas-tabla-head > thead{
+	border-bottom: 1px solid black;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(1){
+	width: 10.4cm;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(2){
+	width: 1.4cm;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(3){
+	width: 1.3cm;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(4){
+	width: 2.2cm;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(5){
+	width: 1.1cm;
+}
+
+.factura-lineas-tabla-head > thead th:nth-child(6){
+	width: 2cm;
+}
+
+.factura-lineas-tabla-body td{
+	text-align: center;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(1){
+	width: 10.4cm;
+	text-align: left;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(2){
+	width: 1.4cm;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(3){
+	width: 1.3cm;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(4){
+	width: 2.2cm;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(5){
+	width: 1.1cm;
+}
+
+.factura-lineas-tabla-body tr > td:nth-child(6){
+	width: 2cm;
+}
+
+
+.factura-lineas-tabla-head-venta{
+	margin-top: -0.05cm;
+	text-align: center;
+	margin-left: -0.5cm;
+}
+
+.factura-lineas-tabla-body-venta{
+	text-align: left;
+	width: 19.06cm;
+}
+
+.factura-lineas-tabla-head-venta > thead{
+	border-bottom: 1px solid black;
+}
+
+.factura-lineas-tabla-head-venta > thead th:nth-child(1){
+	width: 11.9cm;
+}
+
+.factura-lineas-tabla-head-venta > thead th:nth-child(2){
+	width: 1.4cm;
+}
+
+.factura-lineas-tabla-head-venta > thead th:nth-child(3){
+	width: 2.2cm;
+}
+
+.factura-lineas-tabla-head-venta > thead th:nth-child(4){
+	width: 1.1cm;
+}
+
+.factura-lineas-tabla-head-venta > thead th:nth-child(5){
+	width: 2cm;
+}
+
+.factura-lineas-tabla-body-venta td{
+	text-align: center;
+}
+
+.factura-lineas-tabla-body-venta tr > td:nth-child(1){
+	width: 11.9cm;
+	text-align: left;
+}
+
+.factura-lineas-tabla-body-venta tr > td:nth-child(2){
+	width: 1.4cm;
+}
+
+.factura-lineas-tabla-body-venta tr > td:nth-child(3){
+	width: 2.2cm;
+}
+
+.factura-lineas-tabla-body-venta tr > td:nth-child(4){
+	width: 1.1cm;
+}
+
+.factura-lineas-tabla-body-venta tr > td:nth-child(5){
+	width: 2cm;
+}
+
+/******************************************************
+*** = end of factura lineas
+******************************************************/
+
+.total-linea-obs{
+	width: 0.025cm;
+	height: 1.65cm;
+	background-color: black;
+	position: absolute;
+	top: 26.2cm;
+	left: 10.4cm;
+}
+
+.total-linea-base{
+	width: 0.025cm;
+	height: 1.65cm;
+	background-color: black;
+	position: absolute;
+	top: 26.2cm;
+	left: 13.55cm;
+}
+
+.total-linea-iva{
+	width: 0.025cm;
+	height: 1.65cm;
+	background-color: black;
+	position: absolute;
+	top: 26.2cm;
+	left: 16.55cm;
+}
+
+.total-head{
+	width: 19.11cm;
+	position: absolute;
+	top: 26.2cm;
+	left: 0.76cm;
+	border: 1px solid black;
+	border-bottom: none;
+	font-size: 12px;
+	text-align: center;
+}
+
+.total-head th:nth-child(1){
+	text-align: left;
+	width: 9.51cm;
+}
+
+.total-head th:nth-child(2){
+	text-align: left;
+	width: 3cm;
+}
+
+.total-head th:nth-child(3){
+	text-align: left;
+	width: 2.8cm;
+}
+
+.total-head th:nth-child(4){
+	text-align: left;
+	width: 3.1cm;
+}
+
+.cc{
+	position: absolute;
+	top: 27.9cm;
+	left: 0.9cm;
+	font-weight: bold;
+}
+
+.total-body{
+	width: 19.11cm;
+	height: 1cm;
+	text-align: center;
+	position: absolute;
+	top: 26.765cm;
+	left: 0.76cm;
+	border: 1px solid black;
+	font-size: 12px;
+}
+
+.total-body td:nth-child(1){
+	text-align: left;
+	width: 9.51cm;
+}
+
+.total-body td:nth-child(2){
+	text-align: right;
+	width: 3cm;
+}
+
+.total-body td:nth-child(3){
+	text-align: right;
+	width: 2.8cm;
+}
+
+.total-body td:nth-child(4){
+	text-align: right;
+	width: 3cm;
+}
+
+.total-body-texto{
+	margin-right: 0.5cm;
+}

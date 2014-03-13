@@ -1,0 +1,438 @@
+/* Aci tot el css propi */
+
+.navbar-collapse{
+	width: 1225px;
+}
+
+.texto-centrado{
+	text-align: center;
+}
+
+.presupuesto-tic{
+	margin-left: -70px;
+}
+
+.form-submits{
+	margin-top: 25px;
+}
+
+.form_lista_clientes {
+	display: inline;
+}
+
+.tabla_lista_clientes{
+	width: 500px;
+}
+
+.tabla_lista_clientes thead td:first-child{
+	text-align: left;
+}
+
+.tabla_lista_clientes tbody td:first-child{
+	text-align: left;
+}
+
+.tabla_lista_clientes, .tabla_lista_facturas thead td:last-child {
+	text-align: right;
+}
+
+.tabla_lista_clientes, .tabla_lista_facturas tbody td:last-child {
+	text-align: right;
+}
+
+.tabla_lista_clientes, .tabla_lista_facturas tbody td:first-child {
+	vertical-align: middle;
+}
+
+.tabla_lista_facturas {
+	width: 700px;
+}
+
+.tabla_lista_facturas thead td:nth-child(1){
+	width: 100px;
+}
+
+.tabla_lista_facturas tbody td:nth-child(1){
+	width: 100px;
+}
+
+.tabla_lista_facturas thead td:nth-child(2){
+	width: 127px;
+}
+
+.tabla_lista_facturas tbody td:nth-child(2){
+	width: 127px;
+}
+
+.tabla_lista_facturas thead td:nth-child(3){
+	width: 100px;
+}
+
+.tabla_lista_facturas tbody td:nth-child(3){
+	width: 100px;
+}
+
+.tabla_lista_facturas thead td:nth-child(4){
+	width: 66px;
+}
+
+.tabla_lista_facturas tbody td:nth-child(4){
+	width: 66px;
+}
+
+.tabla_lista_facturas thead td:nth-child(5){
+	width: 71px;
+}
+
+.tabla_lista_facturas tbody td:nth-child(5){
+	width: 71px;
+}
+
+.tabla_lista_facturas thead td:last-child{
+	width: 236px;
+}
+
+.tabla_lista_facturas tbody td:last-child{
+	width: 236px;
+}
+
+html, body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+body{
+	position: relative;
+}
+
+.tot{
+	position: relative;
+	min-height: 100%;
+}
+
+.header1{
+	position: relative;
+}
+
+.titol1{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	font-family: Helvetica;
+	font-weight: bold;
+	width: 70%;
+	margin-top: 45px;
+}
+
+.subtitol1{
+	position: relative;
+	left: 15%;
+	display: inline-block;
+}
+
+.container1{
+	position: relative;
+	margin-left: auto;
+	margin-right: auto;
+	width: 65%;
+	padding-bottom: 150px;
+}
+
+.footer1{
+	position: absolute;
+	width: 100%;
+	height: 100px;
+	bottom: 0px;
+	left: 0px;
+	border-top: solid 2px #C7C6C6;
+}
+
+.boto1{
+	margin-bottom: 20px;
+}
+
+.boto2{
+	margin-top: 5px;
+}
+
+/* Botons de editar/eliminar dels telefons de contacte */
+.boto3{
+	text-align: right;
+}
+
+.introm{
+	display: inline;
+	position: relative;
+	top: 30px;
+	left: 17%;
+	font-size: 20px;
+}
+
+.meserror{
+	background-color: #DBCFCF;
+	padding: 5px;
+	margin-bottom: 15px;
+}
+
+.prrfad{
+	display: inline;
+}
+
+.listst2 > ul{
+	list-style-type: none;
+}
+
+.botonex{
+	margin-bottom: 15px;
+}
+
+.espe1{
+	margin-top: -1px;
+}
+
+.fila1{
+	position: relative;
+	left: 15px;
+}
+
+.fila2{
+	position: relative;
+	left: 15px;
+	margin-top: 20px;
+}
+
+.ico1{
+	position: relative;
+	top: 25px;
+}
+
+/* Propiedades facturas */
+
+.lineasfactura1{
+	margin-top: 40px;
+	margin-left: 15px;
+	width: 100%;
+}
+
+.resultadot{
+	width: 100%;
+	border: 1px solid #ddd;
+}
+
+.resultadot th, td{
+	padding: 8px;
+}
+
+.boto4{
+	margin-top: 17px;
+	margin-left: 15px;
+}
+
+.boto5{
+	margin-top: 25px;
+}
+
+.presupuestodiv{
+	background-color: #d9edf7;
+	width: 230px;
+	height: 79px;
+	padding: 7px;
+	margin-bottom: 15px;
+}
+
+.campobusquedaf{
+	margin-top: 20px;
+	margin-bottom: 40px;
+}
+
+/* Boton busqueda */
+
+.botonbusqueda1{
+	position: absolute;
+	top: 0px;
+	left: 100%;
+	margin-top: 25px;
+}
+
+.botonbusqueda2{
+	position: absolute;
+	top: 0px;
+	left: 100%;
+	margin-top: 55px;
+}
+
+.campobusqueda1{
+	margin-bottom: 20px;
+}
+
+/******************************************************
+*** = dashboard
+******************************************************/
+
+.panel-primary{
+	width: 900px;
+	height: 400px;
+}
+
+.panel-body{
+	height: 360px;
+}
+
+.row-dashboard{
+	height: 290px;
+}
+
+.col1-dashboard{
+	height: 290px;
+}
+
+.col2-dashboard{
+	height: 290px;
+}
+
+/******************************************************
+*** = end of dashboard
+******************************************************/
+
+.tipodoc{
+	padding: 12px;
+}
+
+.tipodoc p{
+	display: inline-block;
+}
+
+.tipodoc p:last-child{
+	margin-left: 28px;
+}
+
+/* Arreglo de les pestanyes venta i alquiler */
+
+.arreglotabs{
+	width: 700px;
+	margin-bottom: 20px;
+}
+
+.arreglotabs2{
+	width: 350px;
+}
+
+.arreglotabs3{
+	width: 233px;
+}
+
+.contador-documentos{
+	background-color: rgba(184,32,32,1);
+	width: 20px;
+	height: 20px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	display: inline-block;
+	color: white;
+	text-align: center;
+	font-size: 14px;
+	float: right;
+}
+
+.hide{
+	display: none;
+}
+
+.cargandoMat{
+	float: right;
+	margin-top: -25px;
+	margin-right: -25px;
+}
+
+/* Resumen de facturas */
+
+.tabsresumen{
+	width: 800px;
+	margin-bottom: 25px;
+	margin-top: 20px;
+}
+
+.tabsresumen2{
+	width: 266px;
+}
+
+.campobusquedar{
+	margin-top: 24px;
+	margin-bottom: 43px;
+}
+
+.tabtotalres{
+	border: 1px solid #ddd;
+	width: 800px;
+	margin-top: 40px;
+}
+
+.tablaresultados{
+	margin-bottom: 40px;
+}
+
+.tabres1{
+	width: 800px;
+}
+
+
+/* Seccion de ayuda */
+
+.helpclass{
+	list-style-type: none;
+}
+
+.helpclass li{
+	padding-top: 10px;
+}
+
+.helpclass a{
+	width: 200px;
+}
+
+.no-pagado{
+	color: red;
+}
+
+.borrar-pagado{
+	margin-left: -35px;
+	margin-top: 10px;
+}
+
+.laravel-icono{
+	width: 40px;
+	height: 29px;
+}
+
+.bootstrap-icono{
+	width: 90px;
+	height: 29px;
+}
+
+.git-icono{
+	width: 35px;
+	height: 35px;
+}
+
+.pagoda-icono{
+	width: 60px;
+	height: 30px;
+}
+
+.footer-text{
+	font-size: 14px;
+	color: #777;
+	font-family: Helvetica;
+	margin-left: 50px;
+}
+
+.tabla-resumen-columna-cliente{
+	text-align: left;
+	padding-left: 25px !important;
+}
+
+.separacionum{
+	margin-top: 20px;
+}
