@@ -1,9 +1,6 @@
 global:
   env:
     - ENV: production
-db1:
-  type: mysql
-  name: audionet
 web1:
   php_version: 5.4.14
   document_root: public
@@ -27,6 +24,10 @@ web1:
     - app/storage/views
   after_build:
     - "if [ ! -f composer.phar ]; then curl -s http://getcomposer.org/installer | php; fi; php composer.phar install --prefer-source"
+  before_deploy:
+    - "php artisan migrate:rollback"
+    - "php artisan migrate"
+    - "php artisan db:seed"
   after_deploy:
     - "php artisan cache:clear"
     - "rm -f app/storage/views/*"

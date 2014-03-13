@@ -4,8 +4,7 @@
 		<meta charset="UTF-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Audio.NET</title>
-		<link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
+		<title>Facturas</title>
 		{{ HTML::style('css/bootstrap.min.css') }}
 		{{ HTML::style('css/style.css') }}
 
@@ -32,7 +31,7 @@
 						        <span class="icon-bar"></span>
 								<span class="sr-only">Toggle navigation</span>
 							</button>
-							<a class="navbar-brand" href="#">Audionet</a>
+							<a class="navbar-brand" href="#">Empresa</a>
 						</div><!-- end of navbar-header -->
 						<div class="collapse navbar-collapse espacio" id="audionet-navbar-main">
 							<ul class="nav navbar-nav">

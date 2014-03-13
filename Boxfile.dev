@@ -1,9 +1,6 @@
 global:
   env:
     - ENV: production
-db1:
-  type: mysql
-  name: audionet
 web1:
   php_version: 5.4.14
   document_root: public

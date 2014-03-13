@@ -18,7 +18,7 @@ Route::get('/login', function()
 
 Route::get('/', function()
 {
-	return View::make('index');
+	return View::make('login');
 });
 
 Route::get('ayuda/general', function()

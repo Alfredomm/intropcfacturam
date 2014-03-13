@@ -9,7 +9,6 @@
 	<div class="wrapper">
 		
 		<img src="img/logo.png" alt="Audionet" class="logo">
-		<img src="img/marge-vertical-calitat.png" alt="Datos audionet" class="vertical">
 		<table class="datos-empresa">
 			<tbody>
 				<tr>

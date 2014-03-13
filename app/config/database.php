@@ -55,18 +55,18 @@ return array(
 		/*****************************
 		*** PagodaBox Settings *******
 		*****************************/
-		/*
+		
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'tunnel.pagodabox.com:3306',
 			'database'  => 'audionet',
-			'username'  => 'danielle',
-			'password'  => 'VSxn5ske',
+			'username'  => 'henrietta',
+			'password'  => '9Ub8BlAa',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-		*/
+		
 		/****************************
 		*** localhost Settings ******
 		****************************/
