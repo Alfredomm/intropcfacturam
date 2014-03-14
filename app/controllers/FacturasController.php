@@ -180,6 +180,8 @@ class FacturasController extends BaseController {
 			$factura->fecha = $fecha;
 		} else if( Input::get('update') == 'borrar_fecha_pagado' ) {
 			$factura->fecha_pagado = '';
+		} else if( Input::get('update') == 'cliente' ) {
+			$factura->cliente_id = Input::get('nombreCli_id');
 		} else {			
 			$factura->fecha_pagado = $fecha;
 		}

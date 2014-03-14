@@ -6,11 +6,22 @@
 	
 	<h2 class="subtitol1">Creación de {{ $tipo }} ( para 
 		@if( $factura->venta == 0 )
-		{{ 'alquiler' }}
+			alquiler )
+			@if( $factura->presupuesto == 0 && $factura->borrador == 0 )
+				- AL {{ date('y') }}/{{ $factura->num_factura }}
+			@elseif( $factura->presupuesto == 1 )
+				- AL {{ $factura->num_factura }}
+			@endif
 		@else
-		{{ 'venta' }}
+			venta )
+			@if( $factura->presupuesto == 0 && $factura->borrador == 0 )
+				- VE {{ date('y') }}/{{ $factura->num_factura }}
+			@elseif( $factura->presupuesto == 1 )
+				- VE {{ $factura->num_factura }}
+			@endif
 		@endif
-		)</h2>
+		 - {{ $factura->cliente->nombre.' '.$factura->cliente->apellido1.' '.$factura->cliente->apellido2 }}
+	</h2>
 
 @stop
 
@@ -47,6 +58,42 @@
 		</div><!-- End meserror -->
 
 	@endif
+
+	<div class="row">
+		<h4>
+			Cambiar nombre de cliente:
+		</h4>
+
+		<div class="col-md-4">
+
+			{{ Form::open(array( 'method' => 'PUT', 'route' => 'facturas.update' )) }}
+				
+				{{ Form::token() }}
+
+				{{ Form::hidden('update', 'cliente') }}
+				{{ Form::hidden('id', $factura->id) }}
+				{{ Form::hidden('tipo', $tipo) }}
+
+				<div ng-controller="list" class="container-fluid" id="nombremat_angjs">
+
+							<h3>Cliente nº: @{{asyncSelected.id}}</h3>
+
+							<p>
+								{{ Form::label('nombreCli', 'Cliente') }}
+								{{ Form::text('nombreCli', null, array('class'=>'form-control', 'autofocus' => true, 'ng-model'=>'asyncSelected', 'typeahead' => "cliente as (cliente.nombre+' '+cliente.apellido1+' '+cliente.apellido2) for cliente in clientejs($viewValue)", 'typeahead-loading' => "cargandoClientes", 'autocomplete' => 'off', 'ng-trim' => false)) }}
+								<i ng-show="cargandoClientes" class="glyphicon glyphicon-refresh cargandoMat"></i>
+								<input type="hidden" value=@{{asyncSelected.id}} name="nombreCli_id" id="nombreCli_id" />
+							</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+					{{ Form::submit(('Actualizar cliente'),array('class'=>'btn btn-info form-submits-cambiar-cliente-factura')) }}
+			</div>
+
+			{{ Form::close() }}
+
+	</div>
 
 	<div class="row">
 
@@ -450,6 +497,29 @@
 			      });
 			      materiales = $filter('filter')(materiales, {nombreCat: $scope.asyncSelected});
 			      return materiales;
+			    });
+		  	};
+		});
+
+		angular.module('plunker', ['ui.bootstrap'])
+		.controller('list', function($scope, $http, $filter) {
+
+			angular.element('#nombremat_html').addClass('hide');
+			angular.element('#nombremat_angjs').removeClass('hide');
+			angular.element('#nombreCli_id').val('');
+
+			$scope.selected = undefined;
+
+			$scope.clientejs = function() {
+			    return $http.post('/facturas/listaclientes')
+			    .then(function(res){
+			      var clientes = [];
+			      angular.forEach(res.data.clientejs, function(cliente){
+			      	//$filter('filter')(material.categoria, $scope.asyncSelected);
+			        clientes.push(cliente);
+			      });
+			      clientes = $filter('filter')(clientes, {nombreCompleto: $scope.asyncSelected});
+			      return clientes;
 			    });
 		  	};
 		});
