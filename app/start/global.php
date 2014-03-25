@@ -48,7 +48,8 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 
 App::error(function(Exception $exception, $code)
 {
-	Log::error($exception);
+	//Log::error($exception);
+	return Response::view('plantillas.404', array(), $code);
 });
 
 /*

@@ -504,8 +504,6 @@
 		angular.module('plunker', ['ui.bootstrap'])
 		.controller('list', function($scope, $http, $filter) {
 
-			angular.element('#nombremat_html').addClass('hide');
-			angular.element('#nombremat_angjs').removeClass('hide');
 			angular.element('#nombreCli_id').val('');
 
 			$scope.selected = undefined;
