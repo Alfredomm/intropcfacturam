@@ -74,7 +74,7 @@
 				{{ Form::hidden('id', $factura->id) }}
 				{{ Form::hidden('tipo', $tipo) }}
 
-				<div ng-controller="list" class="container-fluid" id="nombremat_angjs">
+				<div ng-controller="list" class="container-fluid hide" id="nombrecli_angjs">
 
 							<h3>Cliente nº: @{{asyncSelected.id}}</h3>
 
@@ -483,7 +483,9 @@
 
 			angular.element('#nombremat_html').addClass('hide');
 			angular.element('#nombremat_angjs').removeClass('hide');
+			angular.element('#nombrecli_angjs').removeClass('hide');
 			angular.element('#nombreMat_id').val('');
+			angular.element('#nombreCli_id').val('');
 
 			$scope.selected = undefined;
 
@@ -499,16 +501,8 @@
 			      return materiales;
 			    });
 		  	};
-		});
 
-		angular.module('plunker', ['ui.bootstrap'])
-		.controller('list', function($scope, $http, $filter) {
-
-			angular.element('#nombreCli_id').val('');
-
-			$scope.selected = undefined;
-
-			$scope.clientejs = function() {
+		  	$scope.clientejs = function() {
 			    return $http.post('/facturas/listaclientes')
 			    .then(function(res){
 			      var clientes = [];
