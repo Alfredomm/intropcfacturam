@@ -55,7 +55,7 @@ return array(
 		/*****************************
 		*** PagodaBox Settings *******
 		*****************************/
-		
+	        /*	
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'tunnel.pagodabox.com:3306',
@@ -66,22 +66,22 @@ return array(
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-		
+		*/
 		/****************************
 		*** localhost Settings ******
 		****************************/
-		/*
+		
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'audionet',
+			'database'  => 'facturas',
 			'username'  => 'root',
-			'password'  => '',
+			'password'  => 'ipc*2014',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
 		),
-		*/
+		
 		'pgsql' => array(
 			'driver'   => 'pgsql',
 			'host'     => 'localhost',

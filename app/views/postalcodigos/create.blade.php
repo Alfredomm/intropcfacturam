@@ -49,7 +49,7 @@
 				<p>
 					{{ Form::label('provincias_lista') }}
 					{{ Form::select('provincias_lista', $provincias, Input::old('provincias_lista'), array('class'=>'form-control')) }}
-					(Si la provincia no està a la llista i has d'introduïr una nova, sel·lecciona la primera opció de la llista "---")<br>
+					(Si la provincia no está a la lista y tienes que introducir una nueva, selecciona la primera opción de la lista "---")<br>
 
 					{{ Form::label('provincia', 'Provincia *') }}
 					{{ Form::text('provincia', Input::old('provincia'), array('class'=>'form-control')) }}

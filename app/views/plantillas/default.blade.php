@@ -119,7 +119,7 @@
 
 				@section('header')
 
-				<h1 class="titol1">Audio.NET - Gestión de empresa</h1>
+				<h1 class="titol1">Gestión de empresa</h1>
 
 				@show
 
