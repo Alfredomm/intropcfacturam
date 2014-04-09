@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder {
 		// $this->call('MaterialesTableSeeder');
 		// $this->call('FacturalineasTableSeeder');
 		// $this->call('FacturasTableSeeder');
-		 $this->call('AjustesTableSeeder');
+		 $this->call('TiposivasTableSeeder');
 		 $this->call('UsersTableSeeder');
 	}
 

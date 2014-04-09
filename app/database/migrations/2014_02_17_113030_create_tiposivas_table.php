@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateAjustesTable extends Migration {
+class CreateTiposivasTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,8 +12,9 @@ class CreateAjustesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('ajustes', function(Blueprint $table) {
+		Schema::create('tiposivas', function(Blueprint $table) {
 			$table->increments('id');
+			$table->string('tipo');
 			$table->integer('iva');
 			$table->timestamps();
 		});
@@ -27,7 +28,7 @@ class CreateAjustesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('ajustes');
+		Schema::drop('tiposivas');
 	}
 
 }

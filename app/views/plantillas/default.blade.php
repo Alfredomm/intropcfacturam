@@ -14,6 +14,7 @@
 	      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 	    <![endif]-->
+	    <link rel="icon" type="image/x-ico" href="img/cubes_green.ico" />
 	</head>
 	<body>
 
@@ -31,7 +32,7 @@
 						        <span class="icon-bar"></span>
 								<span class="sr-only">Toggle navigation</span>
 							</button>
-							<a class="navbar-brand" href="#">Empresa</a>
+							<a class="navbar-brand" href="#">IntroPC</a>
 						</div><!-- end of navbar-header -->
 						<div class="collapse navbar-collapse espacio" id="audionet-navbar-main">
 							<ul class="nav navbar-nav">
@@ -89,9 +90,9 @@
 								@endif
 
 								@if( $active == 'ajustes' )
-									<li class="active"><a href="{{ route('ajustes.index') }}"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>
+									<li class="active"><a href="/ajustes"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>
 								@else
-									<li><a href="{{ route('ajustes.index') }}"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>
+									<li><a href="/ajustes"><span class="glyphicon glyphicon-cog"></span> Ajustes</a></li>
 								@endif
 
 								@if( $active == 'empresas' )

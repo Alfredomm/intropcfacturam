@@ -291,14 +291,14 @@
 
 			@endif
 
-			<div class="col-md-7">
+			<div class="col-md-5">
 
 				<p>
 					{{ Form::label('nombre', 'Descripcion') }}
 					{{ Form::text('nombre', Input::old('nombre'), array('class'=>'form-control')) }}
 				</p>
 
-			</div><!-- End col-md-7 -->
+			</div><!-- End col-md-5 -->
 
 			<div class="col-md-1">
 
@@ -332,6 +332,15 @@
 						{{ Form::label('precio_alquiler', 'Precio Ud.') }}
 						{{ Form::text('precio_alquiler', Input::old('precio'), array('class'=>'form-control')) }}
 					@endif
+				</p>
+
+			</div><!-- End col-md-2 -->
+
+			<div class="col-md-2">
+
+				<p>
+					{{ Form::label('iva', 'IVA') }}
+					{{ Form::select('iva', $tipoiva, $selected = null, array('class'=>'form-control')) }}
 				</p>
 
 			</div><!-- End col-md-2 -->
@@ -374,6 +383,7 @@
 								@endif
 								<th>Precio:</th>
 								<th>Descuento:</th>
+								<th>IVA:</th>
 								<th>SUB-TOTAL:</th>
 								<th></th>
 							</tr>
@@ -410,6 +420,9 @@
 									@endif
 								</td>
 								<td>
+									{{$fl->iva}}
+								</td>
+								<td>
 									@if( $fl->subtotal != 0 )
 										@if($factura->rectificativa == 1)
 										-
@@ -430,10 +443,10 @@
 				</table>
 				<table border="1" class="resultadot">
 					<tr>
-						<th>Base imponible:</th><th>IVA:</th><th>TOTAL:</th>
+						<th>TOTAL:</th>
 					</tr>
 					<tr>
-						<td>{{ $suma }}</td><td>{{ $ajustes->iva }}%</td><td>{{ round($suma + ($suma * (($ajustes->iva)/100)), 2) }}</td>
+						<td>{{$factura->total}}</td>
 					</tr>
 				</table>
 			</div><!-- End lineasfactura1 -->

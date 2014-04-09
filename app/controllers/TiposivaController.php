@@ -1,6 +1,6 @@
 <?php
 
-class AjustesController extends BaseController {
+class TiposivaController extends BaseController {
 
 	public function __construct() {
 		$this->beforeFilter('auth');
@@ -14,8 +14,8 @@ class AjustesController extends BaseController {
 	 */
 	public function index()
 	{
-		$ajustes = Ajuste::all();
-        return View::make('ajustes.index', array('ajustes' => $ajustes, 'active' => 'ajustes'));
+		$tipoiva = Tiposiva::all();
+        return View::make('tiposiva.index', array('tipoiva' => $tipoiva, 'active' => 'ajustes'));
 	}
 
 	/**
@@ -25,7 +25,7 @@ class AjustesController extends BaseController {
 	 */
 	public function create()
 	{
-        return View::make('ajustes.create');
+        return View::make('tiposiva.create', array('active' => 'ajustes'));
 	}
 
 	/**
@@ -35,7 +35,24 @@ class AjustesController extends BaseController {
 	 */
 	public function store()
 	{
-		//
+		$validation = Tiposiva::validate(Input::all());
+
+		if( $validation->passes() ) {
+
+			$tipoiva = Tiposiva::create(array(
+				'tipo' => Input::get('tipo'),
+				'iva' => Input::get('iva')
+			));
+
+			return Redirect::route('tiposiva.index', $tipoiva->id);
+
+		} else {
+
+			return Redirect::route('tiposiva.create')
+				->withErrors($validation)
+				->withInput();
+
+		}
 	}
 
 	/**
@@ -46,7 +63,7 @@ class AjustesController extends BaseController {
 	 */
 	public function show($id)
 	{
-        return View::make('ajustes.show');
+        return View::make('tiposiva.show');
 	}
 
 	/**
@@ -57,8 +74,8 @@ class AjustesController extends BaseController {
 	 */
 	public function edit($id)
 	{
-		$ajustes = Ajuste::find($id);
-        return View::make('ajustes.edit', array('ajustes' => $ajustes, 'active'=>'ajustes'));
+		$tipoiva = Tiposiva::find($id);
+        return View::make('tiposiva.edit', array('tipoiva' => $tipoiva, 'active'=>'ajustes'));
 	}
 
 	/**
@@ -69,22 +86,7 @@ class AjustesController extends BaseController {
 	 */
 	public function update($id)
 	{
-		$validation = Ajuste::validateUpdate(Input::all());
 
-		if( $validation->passes() ) {
-
-			$ajustes = Ajuste::find(Input::get('id'));
-
-			$ajustes->iva = Input::get('iva');
-
-			$ajustes->save();
-
-			return Redirect::route('ajustes.index');
-		} else {
-			return Redirect::route('ajustes.edit', Input::get('id'))
-					->withErrors($validation)
-					->withInput();
-		}
 	}
 
 	/**
@@ -95,7 +97,9 @@ class AjustesController extends BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$tipoiva = Tiposiva::find(Input::get('id'));
+		$tipoiva->delete();
+		return Redirect::route('tiposiva.index');
 	}
 
 }

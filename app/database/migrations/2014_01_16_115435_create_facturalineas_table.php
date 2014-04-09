@@ -20,6 +20,7 @@ class CreateFacturalineasTable extends Migration {
 			$table->decimal('cantidad_material');
 			$table->decimal('dias');
 			$table->decimal('precio');
+			$table->decimal('iva');
 			$table->decimal('descuento');
 			$table->decimal('subtotal');
 			$table->timestamps();

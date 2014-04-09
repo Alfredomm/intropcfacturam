@@ -23,10 +23,10 @@
 		<tbody>
 		<tr>
 			<td>
-				IVA
+				Tipos de IVA
 			</td>
 			<td>
-				<a class="btn btn-default" href="{{ route('ajustes.edit', $ajustes[0]->id) }}"><i class="glyphicon glyphicon-pencil"></i></a>
+				<a class="btn btn-default" href="{{ route('tiposiva.index') }}"><i class="glyphicon glyphicon-pencil"></i></a>
 			</td>
 		</tr>
 		</tbody>

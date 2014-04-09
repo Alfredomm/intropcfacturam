@@ -18,7 +18,7 @@ class FacturasController extends BaseController {
 			$anyos[$i] = $i;
 		}
 
-		$ajustes = Ajuste::all()->first();
+		$ajustes = Tiposiva::all()->first();
 
 		$facturasrectificativa = "";
 
@@ -135,7 +135,6 @@ class FacturasController extends BaseController {
 			$empresa2 = $empresas[1];
 		}
 
-		$ajustes = Ajuste::find(1);
 		$prevUrl = URL::previous();
 
 		$calcularTotal = strpos($prevUrl, 'createlineshow');
@@ -149,7 +148,7 @@ class FacturasController extends BaseController {
 			$factura->save();
 		}
 
-		$pdf = PDF::loadView('facturas.show', array('factura' => $factura, 'empresa' => $empresa, 'ajustes' => $ajustes, 'empresa2' => $empresa2));
+		$pdf = PDF::loadView('facturas.show', array('factura' => $factura, 'empresa' => $empresa, 'empresa2' => $empresa2));
 		return $pdf->setPaper('a4')->setOrientation('portrait')->stream();
         //return View::make('facturas.show', array('factura' => $factura, 'empresa' => $empresa));
 	}
@@ -406,8 +405,7 @@ class FacturasController extends BaseController {
 		$materiales->lists('categoriaNombre', 'id');
 		$material = array('0' => '-------') + $materiales->lists('categoriaNombre', 'id');
 		$factura = Factura::find($id);
-
-		$ajustes = Ajuste::all()->first();
+		$tipoiva = Tiposiva::lists('iva', 'iva');
 
 		$dias = array();
 		for ($i=0; $i < 31; $i++) {
@@ -426,10 +424,10 @@ class FacturasController extends BaseController {
 		}
 
 		if( $mat == "" ) {
-			return View::make('facturas.createline', array( 'tipo' => $tipo, 'ajustes' => $ajustes, 'material' => $material, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos ));
+			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
 		} else {
 			$mat = Material::find($mat);
-			return View::make('facturas.createline', array( 'tipo' => $tipo, 'ajustes' => $ajustes, 'material' => $material, 'mat' => $mat, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos ));
+			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'mat' => $mat, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
 		}
 	}
 
@@ -461,6 +459,8 @@ class FacturasController extends BaseController {
 
 			$subtotal = ((Input::get('cantidad_material'))*($precio)*(Input::get('dias')))-((Input::get('cantidad_material'))*($precio)*(Input::get('dias'))*(Input::get('descuento')/100));
 
+			$subtotal = $subtotal + ($subtotal*(Input::get('iva')/100));
+
 			$material = Material::find(Input::get('material_id'));
 			if( Input::has('material_id') && $material->nombre == Input::get('nombre') ) {
 				$facturalinea = Facturalinea::create(array(
@@ -469,6 +469,7 @@ class FacturasController extends BaseController {
 					'cantidad_material' => Input::get('cantidad_material'),
 					'precio' => $precio,
 					'dias' => Input::get('dias'),
+					'iva' => Input::get('iva'),
 					'descuento' => Input::get('descuento'),
 					'subtotal' => $subtotal
 				));
@@ -481,6 +482,7 @@ class FacturasController extends BaseController {
 					'cantidad_material' => Input::get('cantidad_material'),
 					'precio' => $precio,
 					'dias' => Input::get('dias'),
+					'iva' => Input::get('iva'),
 					'descuento' => Input::get('descuento'),
 					'subtotal' => $subtotal
 				));
@@ -666,7 +668,7 @@ class FacturasController extends BaseController {
 		$mes = Input::get('mes');
 		$anyo = Input::get('anyo');
 		$tipo = Input::get('tipo');
-		$ajustes = Ajuste::first();
+		$ajustes = Tiposiva::first();
 		
 		$meses = array(
 			'00' => '-------', '01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril', '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre'
@@ -927,72 +929,49 @@ class FacturasController extends BaseController {
 
 	public function resumen(){
 
-		$ajustes = Ajuste::all()->first();
+		$tipoiva = array('0' => '-------') + Tiposiva::lists('iva', 'iva');
 
-		$anyos = array();
-			$anyos[0] = '-------';
-			for ($i=1940; $i < date('o')+1; $i++) {
-				$anyos[$i] = $i;
-			}
+		$mesesini = array(
+			'00' => '-------', '01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril', '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre'
+		);
 
-		if( Input::has('anyo') ){
+		$anyosini = array();
+		$anyosini[0] = '-------';
+		for ($i=1940; $i < date('o')+1; $i++) {
+			$anyosini[$i] = $i;
+		}
 
-			$anyo = Input::get('anyo');
+		$mesesfin = array(
+			'00' => '-------', '01' => 'Enero', '02' => 'Febrero', '03' => 'Marzo', '04' => 'Abril', '05' => 'Mayo', '06' => 'Junio', '07' => 'Julio', '08' => 'Agosto', '09' => 'Septiembre', '10' => 'Octubre', '11' => 'Noviembre', '12' => 'Diciembre'
+		);
 
-			$facturasventa = Factura::orderBy('fecha', 'desc')->where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->get();
+		$anyosfin = array();
+		$anyosfin[0] = '-------';
+		for ($i=1940; $i < date('o')+1; $i++) {
+			$anyosfin[$i] = $i;
+		}
 
-			$facturasalquiler = Factura::orderBy('fecha', 'desc')->where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->get();
+		$flag = 0;
 
-			$facturasrectificativa = Factura::orderBy('fecha', 'desc')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '1')->where('fecha', 'LIKE', $anyo.'__'.'__')->get();
+		if( Input::get('iva') != '0' ){
 
-			$sumaventasganan = Factura::where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '<>', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
-
-			$sumaventasdeuda = Factura::where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '=', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
-
-			$sumalquilerganan = Factura::where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '<>', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
-
-			$sumalquilerdeuda = Factura::where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '=', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
-
-			$sumadeudatotal = Factura::where('fecha_pagado', '=', '')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
-
-			$sumabeneficiototal = Factura::where('fecha_pagado', '<>', '')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->where('fecha', 'LIKE', $anyo.'__'.'__')->sum('total');
+			$facturalinea = Facturalinea::where('iva', '=', Input::get('iva'))->get();
 
 		} else {
 
-			$facturasventa = Factura::orderBy('fecha', 'desc')->where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->get();
+			$facturalinea = Facturalinea::all();
 
-			$facturasalquiler = Factura::orderBy('fecha', 'desc')->where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->get();
-
-			$facturasrectificativa = Factura::orderBy('fecha', 'desc')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '1')->get();
-
-			$sumaventasganan = Factura::where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '<>', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-
-			$sumaventasdeuda = Factura::where('venta', '=', '1')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '=', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-
-			$sumalquilerganan = Factura::where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '<>', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-
-			$sumalquilerdeuda = Factura::where('venta', '=', '0')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('fecha_pagado', '=', '')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-
-			$sumadeudatotal = Factura::where('fecha_pagado', '=', '')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-
-			$sumabeneficiototal = Factura::where('fecha_pagado', '<>', '')->where('presupuesto', '=', '0')->where('borrador', '=', '0')->where('rectificativa', '=', '0')->where('existe_rectificativa', '=', '0')->sum('total');
-			
 		}
 
-		$sumaventasganan = ($sumaventasganan+($sumaventasganan*(($ajustes->iva)/100)));
+		if( (Input::get('mesesini') != '00') && (Input::get('mesesfin') != '00') && (Input::get('anyosini') != '0') && (Input::get('anyosfin') != '0') ){
 
-		$sumaventasdeuda = ($sumaventasdeuda+($sumaventasdeuda*(($ajustes->iva)/100)));
+			/*$facturalinea = Factura::where('fecha', '>=', Input::get('anyosini').'____')->where('fecha', '<=', Input::get('anyosfin').'____')->where('fecha', '>=', '____'.Input::get('mesesini').'__')->where('fecha', '<=', '____'.Input::get('mesesfin').'__')->get();*/
 
-		$sumalquilerganan = ($sumalquilerganan+($sumalquilerganan*(($ajustes->iva)/100)));
+			$flag = 1;
 
-		$sumalquilerdeuda = ($sumalquilerdeuda+($sumalquilerdeuda*(($ajustes->iva)/100)));
+		}
 
-		$sumadeudatotal = ($sumadeudatotal+($sumadeudatotal*(($ajustes->iva)/100)));
-
-		$sumabeneficiototal = ($sumabeneficiototal+($sumabeneficiototal*(($ajustes->iva)/100)));
-
-
-		return View::make('facturas.resumen', array('active' => 'resumen', 'ajustes' => $ajustes, 'anyos' => $anyos, 'facturasventa' => $facturasventa, 'facturasalquiler' => $facturasalquiler, 'facturasrectificativa' => $facturasrectificativa, 'sumaventasganan' => $sumaventasganan, 'sumaventasdeuda' => $sumaventasdeuda, 'sumalquilerganan' => $sumalquilerganan, 'sumalquilerdeuda' => $sumalquilerdeuda, 'sumadeudatotal' => $sumadeudatotal, 'sumabeneficiototal' => $sumabeneficiototal));
+		return View::make('facturas.resumen', array('active' => 'resumen', 'flag' => $flag, 'tipoiva' => $tipoiva, 'facturalinea' => $facturalinea, 'mesesini' => $mesesini, 'mesesfin' => $mesesfin, 'anyosini' => $anyosini, 'anyosfin' => $anyosfin));
 
 	}
 
@@ -1008,7 +987,7 @@ class FacturasController extends BaseController {
 			$anyos[$i] = $i;
 		}
 
-		$ajustes = Ajuste::all()->first();
+		$ajustes = Tiposiva::all()->first();
 
 		$facturasrectificativa = "";
 

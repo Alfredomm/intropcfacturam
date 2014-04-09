@@ -1,15 +1,16 @@
 <?php
 
-class AjustesTableSeeder extends Seeder {
+class TiposivasTableSeeder extends Seeder {
 
 	public function run()
 	{
 		// Uncomment the below to wipe the table clean before populating
-		DB::table('ajustes')->truncate();
+		DB::table('tiposivas')->truncate();
 
-		$ajustes = array(
+		$tiposivas = array(
 
 			array(
+				"tipo" => "Normal",
 				"iva" => 21,
 				"created_at" => new DateTime,
 				"updated_at" => new DateTime
@@ -18,7 +19,7 @@ class AjustesTableSeeder extends Seeder {
 		);
 
 		// Uncomment the below to run the seeder
-		DB::table('ajustes')->insert($ajustes);
+		DB::table('tiposivas')->insert($tiposivas);
 	}
 
 }

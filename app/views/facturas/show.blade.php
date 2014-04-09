@@ -8,7 +8,6 @@
 <body>
 	<div class="wrapper">
 		
-		<img src="img/logo.png" alt="Audionet" class="logo">
 		<table class="datos-empresa">
 			<tbody>
 				<tr>
@@ -18,7 +17,7 @@
 				</tr>
 				<tr>
 					<td>
-						{{ $empresa->nombre }}
+						<b>{{ $empresa->nombre }}</b>
 					</td>
 				</tr>
 				<tr>
@@ -146,7 +145,7 @@
 						Población
 					</td>
 					<td>
-						@if( count($factura->cliente) != 0 ) {{ $factura->cliente->postalcodigo->provincia }} @endif
+						@if( count($factura->cliente) != 0 ) {{ $factura->cliente->postalcodigo->poblacion }} @endif
 					</td>
 				</tr>
 			</tbody>
@@ -200,7 +199,7 @@
 								Precio UD
 							</th>
 							<th>
-								Dto
+								IVA
 							</th>
 							<th>
 								Total
@@ -270,7 +269,7 @@
 								Precio UD
 							</th>
 							<th>
-								Dto
+								IVA
 							</th>
 							<th>
 								Total
@@ -302,9 +301,7 @@
 									@endif
 								</td>
 								<td>
-									@if( $fl->descuento != 0 )
-										{{$fl->descuento}}
-									@endif
+									{{ $fl->iva }}
 								</td>
 								<td>
 									@if( $fl->subtotal != 0 )
@@ -331,10 +328,10 @@
 						Observaciones
 					</th>
 					<th>
-						Base imponible
+						Pagado
 					</th>
 					<th>
-						{{ $ajustes->iva }}% I.V.A.
+						Base imponible
 					</th>
 					<th>
 						Total
@@ -355,15 +352,7 @@
 					</td>
 					<td>
 						<span class="total-body-texto">
-							@if($factura->rectificativa == 1)
-							-
-							@endif
-							{{ number_format((float)$suma, 2, '.', '') }}
-						</span>
-					</td>
-					<td>
-						<span class="total-body-texto">
-							{{ number_format((float)$ajustes->iva, 2, '.', '') }}
+
 						</span>
 					</td>
 					<td>
@@ -371,7 +360,21 @@
 							@if($factura->rectificativa == 1)
 							-
 							@endif
-							{{ number_format((float)round($suma + ($suma * (($ajustes->iva)/100)), 2), 2, '.', '') }}
+							<?php $sum = 0; ?>
+							@foreach( $factura->facturalineas as $fl )
+
+								<?php $sum += $fl->precio; ?>
+
+							@endforeach
+							{{ $sum }}
+						</span>
+					</td>
+					<td>
+						<span class="total-body-texto">
+							@if($factura->rectificativa == 1)
+							-
+							@endif
+							{{ number_format((float)round($suma, 2), 2, '.', '') }}
 						</span>
 					</td>
 				</tr>

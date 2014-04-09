@@ -155,7 +155,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td>
 									
@@ -178,7 +178,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td>
 									
@@ -207,7 +207,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td class="lista-factura-pagado">
 									@if( strlen($factura->fecha_pagado) == 8 )
@@ -282,7 +282,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td>
 									
@@ -302,7 +302,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td>
 									
@@ -331,7 +331,7 @@
 									{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 								</td>
 								<td>
-									{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+									{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 								</td>
 								<td>
 									@if( strlen($factura->fecha_pagado) == 8 )
@@ -405,7 +405,7 @@
 										{{ substr($factura->fecha, 6, 2).'-'.substr($factura->fecha, 4, 2).'-'.substr($factura->fecha, 0, 4) }}
 									</td>
 									<td>
-										{{ number_format((float)round($factura->total + (($factura->total * $iva) / 100),2), 2, '.', '') }}
+										{{ number_format((float)round($factura->total,2), 2, '.', '') }}
 									</td>
 									<td>
 										@if( strlen($factura->fecha_pagado) == 8 )

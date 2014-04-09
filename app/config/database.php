@@ -76,7 +76,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'facturas',
 			'username'  => 'root',
-			'password'  => 'ipc*2014',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

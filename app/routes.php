@@ -21,14 +21,9 @@ Route::get('/', function()
 	return View::make('login');
 });
 
-Route::get('ayuda/general', function()
+Route::get('ajustes', function()
 {
-	return View::make('ayuda.general', array('active' => 'ayuda'));
-});
-
-Route::get('cliente', function()
-{
-	return View::make('ayuda.general', array('active' => 'ayuda'));
+	return View::make('ajustes.index', array('active' => 'ajustes'));
 });
 
 /****************************************************************************************************
@@ -121,6 +116,8 @@ Route::resource('postalcodigos', 'PostalcodigosController');
 
 Route::resource('tipos', 'TiposController');
 
+Route::resource('tiposiva', 'TiposivaController');
+
 Route::resource('permisos', 'PermisosController');
 
 Route::resource('materiales', 'MaterialesController');
@@ -128,7 +125,5 @@ Route::resource('materiales', 'MaterialesController');
 Route::resource('facturalineas', 'FacturalineasController');
 
 Route::resource('facturas', 'FacturasController');
-
-Route::resource('ajustes', 'AjustesController');
 
 Route::resource('usuarios', 'UsuariosController');
