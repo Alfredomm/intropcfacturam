@@ -388,8 +388,11 @@
 								<th></th>
 							</tr>
 					<?php $suma = 0; ?>
+					<tbody id="sortable">
 					@foreach( $factura->facturalineas as $fl )
-						<tr>	
+						<tr>
+							<!-- Linea td a borrar posteriorment -->
+							<td>{{ $fl->id }}</td>
 						@if( $fl->material != NULL )
 							<td>{{$fl->material->nombre}}</td>
 							<?php $suma += $fl->subtotal ?>
@@ -440,6 +443,7 @@
 								</td>	
 							</tr>	
 					@endforeach
+					</tbody>
 				</table>
 				<table border="1" class="resultadot">
 					<tr>
@@ -491,6 +495,26 @@
 @section('script')
 
 	<script>
+		$(function() {
+		    $( "#sortable" ).sortable();
+		    $( "#sortable" ).disableSelection();
+	    });
+
+	    $("#sortable").sortable({
+		    stop: function(event, ui) {
+		    	var facturalinea_id = $(this).attr('facturalineas_id');
+				console.log(facturalinea_id);
+
+		        console.log("New position: " + ui.item.index());
+		        $.ajax({
+		        	url: "/facturas/update",
+		        	type: "PUT",
+		        	dataType: "JSON",
+	        		data: {"id": ""}
+		        })
+		    }
+		});
+
 		angular.module('plunker', ['ui.bootstrap'])
 		.controller('list', function($scope, $http, $filter) {
 

@@ -140,6 +140,7 @@
 
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		{{ HTML::script('https://code.jquery.com/jquery.js') }}
+		{{ HTML::script('https://code.jquery.com/ui/1.10.4/jquery-ui.js') }}
 	    <!-- Include all compiled plugins (below), or include individual files as needed -->
 	    {{ HTML::script('js/bootstrap.min.js') }}
 	    {{ HTML::script('https://ajax.googleapis.com/ajax/libs/angularjs/1.2.14/angular.min.js') }}

@@ -363,7 +363,7 @@
 							<?php $sum = 0; ?>
 							@foreach( $factura->facturalineas as $fl )
 
-								<?php $sum += $fl->precio; ?>
+								<?php $sum += ($fl->cantidad_material)*($fl->precio); ?>
 
 							@endforeach
 							{{ $sum }}

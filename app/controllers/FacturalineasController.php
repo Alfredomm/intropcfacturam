@@ -62,7 +62,7 @@ class FacturalineasController extends BaseController {
 	 */
 	public function update($id)
 	{
-		//
+		die("placa");
 	}
 
 	/**
