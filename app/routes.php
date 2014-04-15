@@ -96,6 +96,8 @@ Route::post('facturas/listaclientes', array( 'as' => 'facturas.listaclientes', '
 
 Route::get('facturas/duplicate/{id}/{tipo?}', array( 'as' => 'facturas.duplicate', 'uses' => 'FacturasController@duplicate' ));
 
+Route::get('facturas/updatePosicion/{id_factura}', array( 'as' => 'facturas.updatePosicion', 'uses' => 'FacturasController@updatePosicion' ));
+
 Route::get('facturas/resumen', array( 'as' => 'facturas.resumen', 'uses' => 'FacturasController@resumen' ));
 
 Route::get('facturas/busquedares', array( 'as' => 'facturas.busquedares', 'uses' => 'FacturasController@busquedares' ));

@@ -391,6 +391,7 @@
 					<tbody id="sortable">
 					@foreach( $factura->facturalineas as $fl )
 						<tr>
+							<input type="hidden" value='{{ $fl->id }}'>
 							<!-- Linea td a borrar posteriorment -->
 							<td>{{ $fl->id }}</td>
 						@if( $fl->material != NULL )
@@ -502,16 +503,18 @@
 
 	    $("#sortable").sortable({
 		    stop: function(event, ui) {
-		    	var facturalinea_id = $(this).attr('facturalineas_id');
+		    	var facturalinea_id = ui.item.children("input").val()
 				console.log(facturalinea_id);
 
 		        console.log("New position: " + ui.item.index());
 		        $.ajax({
-		        	url: "/facturas/update",
-		        	type: "PUT",
+		        	url: "/facturas/updatePosicion/{{$factura->id}}",
+		        	type: "GET",
 		        	dataType: "JSON",
-	        		data: {"id": ""}
-		        })
+	        		data: {"id": facturalinea_id, "index": ui.item.index()}
+		        }).success(function(msg){
+		        	console.log(msg);
+		        });
 		    }
 		});
 

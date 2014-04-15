@@ -927,6 +927,15 @@ class FacturasController extends BaseController {
 
 	}
 
+	public function updatePosicion($id_factura)
+	{
+		$lineasFactura = Facturalinea::where('factura_id', '=', $id_factura)->orderBy('posicion', 'desc')->first();
+		
+		
+		return Response::json( array('totalLineas' => $lineasFactura->posicion) );
+		return Response::json( array('id_factura' => $id_factura, 'id' => Input::get('id'), 'index' => Input::get('index')) );
+	}
+
 	public function resumen(){
 
 		$tipoiva = array('0' => '-------') + Tiposiva::lists('iva', 'iva');
