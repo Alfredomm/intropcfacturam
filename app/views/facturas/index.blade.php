@@ -322,7 +322,7 @@
 						
 							<tr>
 								<td>
-									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'VE '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
+									<a class="btn btn-default" href="{{ route('facturas.createlineshow', array($tipo, $factura->id)) }}">{{ 'AL '.substr($factura->fecha, 2, 2).'/'.$factura->num_factura }}</a>
 								</td>
 								<td>
 									{{ HTML::linkRoute('facturas.show', e(Str::limit($factura->cliente->nombre, 30)), $factura->id, array( 'target' => '_blank' )) }}

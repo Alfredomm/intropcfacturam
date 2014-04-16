@@ -134,6 +134,7 @@ class FacturasController extends BaseController {
 			$empresa = $empresas[0];
 			$empresa2 = null;
 		} else {
+			$empresa = $empresas[0];
 			$empresa2 = $empresas[1];
 		}
 
