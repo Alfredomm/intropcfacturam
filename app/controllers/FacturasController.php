@@ -464,6 +464,13 @@ class FacturasController extends BaseController {
 
 			$subtotal = $subtotal + ($subtotal*(Input::get('iva')/100));
 
+			$flUltimaPosicion = Facturalinea::where('factura_id', '=', Input::get('factura_id'))->orderBy('posicion', 'desc')->first();
+			if( $flUltimaPosicion == NULL ) {
+				$ultimaPos = -1;
+			} else {
+				$ultimaPos = $flUltimaPosicion->posicion;
+			}
+
 			$material = Material::find(Input::get('material_id'));
 			if( Input::has('material_id') && $material->nombre == Input::get('nombre') ) {
 				$facturalinea = Facturalinea::create(array(
@@ -471,6 +478,7 @@ class FacturasController extends BaseController {
 					'factura_id' => Input::get('factura_id'),
 					'cantidad_material' => Input::get('cantidad_material'),
 					'precio' => $precio,
+					'posicion' => $ultimaPos + 1,
 					'dias' => Input::get('dias'),
 					'iva' => Input::get('iva'),
 					'descuento' => Input::get('descuento'),
@@ -484,6 +492,7 @@ class FacturasController extends BaseController {
 					'factura_id' => Input::get('factura_id'),
 					'cantidad_material' => Input::get('cantidad_material'),
 					'precio' => $precio,
+					'posicion' => $ultimaPos + 1,
 					'dias' => Input::get('dias'),
 					'iva' => Input::get('iva'),
 					'descuento' => Input::get('descuento'),
@@ -549,6 +558,7 @@ class FacturasController extends BaseController {
 				'factura_id' => $factura,
 				'cantidad_material' => $pfl->cantidad_material,
 				'precio' => $pfl->precio,
+				'posicion' => $pfl->posicion,
 				'dias' => $pfl->dias,
 				'descuento' => $pfl->descuento,
 				'subtotal' => $pfl->subtotal
@@ -611,6 +621,7 @@ class FacturasController extends BaseController {
 				'factura_id' => $facturaNueva,
 				'cantidad_material' => $fl->cantidad_material,
 				'precio' => $fl->precio,
+				'posicion' => $fl->posicion,
 				'dias' => $fl->dias,
 				'descuento' => $fl->descuento,
 				'subtotal' => $fl->subtotal
@@ -654,6 +665,7 @@ class FacturasController extends BaseController {
 				'factura_id' => $factura,
 				'cantidad_material' => $fl->cantidad_material,
 				'precio' => $fl->precio,
+				'posicion' => $fl->posicion,
 				'dias' => $fl->dias,
 				'descuento' => $fl->descuento,
 				'subtotal' => $fl->subtotal
