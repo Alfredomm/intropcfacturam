@@ -211,7 +211,7 @@
 					<tbody>
 						<!-- foreach facturalineas -->
 						<?php $suma = 0; ?>
-						@foreach( $factura->facturalineas as $fl )
+						@foreach( $facturalineas as $fl )
 						<tr>
 							@if( $fl->material != NULL )
 								<td>{{$fl->material->nombre}}</td>
@@ -281,7 +281,7 @@
 					<tbody>
 						<!-- foreach facturalineas -->
 						<?php $suma = 0; ?>
-						@foreach( $factura->facturalineas as $fl )
+						@foreach( $facturalineas as $fl )
 						<tr>
 							@if( $fl->material != NULL )
 								<td>{{$fl->material->nombre}}</td>

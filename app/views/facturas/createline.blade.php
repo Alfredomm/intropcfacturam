@@ -389,11 +389,10 @@
 							</tr>
 					<?php $suma = 0; ?>
 					<tbody id="sortable">
-					@foreach( $factura->facturalineas as $fl )
+					@foreach( $facturalineas as $fl )
 						<tr>
 							<input type="hidden" value='{{ $fl->id }}'>
 							<!-- Linea td a borrar posteriorment -->
-							<td>{{ $fl->id }}</td>
 						@if( $fl->material != NULL )
 							<td>{{$fl->material->nombre}}</td>
 							<?php $suma += $fl->subtotal ?>
@@ -497,26 +496,47 @@
 
 	<script>
 		$(function() {
-		    $( "#sortable" ).sortable();
-		    $( "#sortable" ).disableSelection();
+			var tableWidth = $('.table').width();
+		    //$( "#sortable" ).sortable();
+		    //$( "#sortable" ).disableSelection();
+		    $("#sortable").sortable({
+		    	cursor: 'move',
+				helper: function(e, ui)
+				{
+					/*
+					//var $originals = tr.children();
+					var $helper = tr.clone();
+					console.log($(this));
+					$(this).width('1030px');
+					$('.table').width(tableWidth);
+					$helper.children().each(function(index)
+					{
+					  // Set helper cell sizes to match the original sizes
+					  //$(this).width($originals.eq(index).width());
+					});
+					return $helper;
+					*/
+					ui.children().each(function() {
+						$(this).width($(this).width());
+					});
+					return ui;
+				},
+			    stop: function(event, ui) {
+			    	//var facturalinea_id = ui.item.children("input").val();
+					//console.log(facturalinea_id);
+
+			        //console.log("New position: " + ui.item.index());
+			        $.ajax({
+			        	url: "/facturas/updatePosicion/{{$factura->id}}",
+			        	type: "GET",
+			        	dataType: "JSON",
+		        		data: {"id": ui.item.children("input").val(), "index": ui.item.index()}
+			        }).success(function(msg){
+			        	//console.log(msg);
+			        });
+			    }
+			}).disableSelection();
 	    });
-
-	    $("#sortable").sortable({
-		    stop: function(event, ui) {
-		    	var facturalinea_id = ui.item.children("input").val()
-				console.log(facturalinea_id);
-
-		        console.log("New position: " + ui.item.index());
-		        $.ajax({
-		        	url: "/facturas/updatePosicion/{{$factura->id}}",
-		        	type: "GET",
-		        	dataType: "JSON",
-	        		data: {"id": facturalinea_id, "index": ui.item.index()}
-		        }).success(function(msg){
-		        	console.log(msg);
-		        });
-		    }
-		});
 
 		angular.module('plunker', ['ui.bootstrap'])
 		.controller('list', function($scope, $http, $filter) {

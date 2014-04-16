@@ -120,8 +120,10 @@ class FacturasController extends BaseController {
 	{
 		if( Input::has('factura_id') ) {
 			$factura = Factura::find(Input::get('factura_id'));
+			$facturalineas = Facturalinea::where('factura_id', '=', Input::get('factura_id'))->orderBy('posicion')->get();
 		} else {
 			$factura = Factura::find($id);
+			$facturalineas = Facturalinea::where('factura_id', '=', $id)->orderBy('posicion')->get();
 		}
 
 		$empresas = Empresa::orderBy('id', 'asc')->take(2)->get();
@@ -148,7 +150,7 @@ class FacturasController extends BaseController {
 			$factura->save();
 		}
 
-		$pdf = PDF::loadView('facturas.show', array('factura' => $factura, 'empresa' => $empresa, 'empresa2' => $empresa2));
+		$pdf = PDF::loadView('facturas.show', array('factura' => $factura, 'facturalineas' => $facturalineas, 'empresa' => $empresa, 'empresa2' => $empresa2));
 		return $pdf->setPaper('a4')->setOrientation('portrait')->stream();
         //return View::make('facturas.show', array('factura' => $factura, 'empresa' => $empresa));
 	}
@@ -406,6 +408,7 @@ class FacturasController extends BaseController {
 		$material = array('0' => '-------') + $materiales->lists('categoriaNombre', 'id');
 		$factura = Factura::find($id);
 		$tipoiva = Tiposiva::lists('iva', 'iva');
+		$facturalineas = Facturalinea::where('factura_id', '=', $id)->orderBy('posicion', 'desc')->get();
 
 		$dias = array();
 		for ($i=0; $i < 31; $i++) {
@@ -424,10 +427,10 @@ class FacturasController extends BaseController {
 		}
 
 		if( $mat == "" ) {
-			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
+			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'active' => $tipo, 'factura' => $factura, 'facturalineas' => $facturalineas, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
 		} else {
 			$mat = Material::find($mat);
-			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'mat' => $mat, 'active' => $tipo, 'factura' => $factura, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
+			return View::make('facturas.createline', array( 'tipo' => $tipo, 'material' => $material, 'mat' => $mat, 'active' => $tipo, 'factura' => $factura, 'facturalineas' => $facturalineas, 'dias' => $dias, 'meses' => $meses, 'anyos' => $anyos, 'tipoiva' => $tipoiva ));
 		}
 	}
 
@@ -929,11 +932,39 @@ class FacturasController extends BaseController {
 
 	public function updatePosicion($id_factura)
 	{
-		$lineasFactura = Facturalinea::where('factura_id', '=', $id_factura)->orderBy('posicion', 'desc')->first();
-		
-		
-		return Response::json( array('totalLineas' => $lineasFactura->posicion) );
-		return Response::json( array('id_factura' => $id_factura, 'id' => Input::get('id'), 'index' => Input::get('index')) );
+		$lineasFactura = Facturalinea::where('factura_id', '=', $id_factura)->orderBy('posicion', 'desc')->first(); // Total lineas factura = 1
+		$posicionLinea = Facturalinea::where('id', '=', Input::get('id'))->first(); // Posició de la liniea a menejar = 
+		$indexNuevo = Input::get('index'); // Nou index de la linea menejada
+
+		$nuevaPosicion = ($lineasFactura->posicion) - ( $indexNuevo ); // La nova posicio de la linea
+
+		if( $nuevaPosicion > $posicionLinea->posicion ) {
+			$lineasARestar = Facturalinea::where('factura_id', '=', $id_factura)->whereBetween('posicion', array($posicionLinea->posicion+1, $nuevaPosicion))->get();
+			//$lineasARestar = Facturalinea::where('factura_id', '=', $id_factura)->where('posicion', '<=', $nuevaPosicion)->where('posicion', '>', $posicionLinea->posicion)->get();
+			//return Response::json(array('lineas' => $lineasARestar));
+			foreach ($lineasARestar as $lR) {
+				//return Response::json(array('id_linea' => $lR->id, 'posicion' => $lR->posicion));
+				$lR->posicion = $lR->posicion - 1;
+				$lR->save();
+			}
+			$posicionLinea->posicion = $nuevaPosicion;
+			$posicionLinea->save();
+		} else if( $nuevaPosicion < $posicionLinea->posicion ){
+			$lineasARestar = Facturalinea::where('factura_id', '=', $id_factura)->whereBetween('posicion', array($nuevaPosicion, $posicionLinea->posicion-1))->get();
+			//$lineasARestar = Facturalinea::where('factura_id', '=', $id_factura)->where('posicion', '>=', $nuevaPosicion)->where('posicion', '<', $posicionLinea->posicion)->get();
+			//return Response::json(array('lineas' => $lineasARestar));
+			foreach ($lineasARestar as $lR) {
+				//return Response::json(array('id_linea' => $lR->id, 'posicion' => $lR->posicion));
+				$lR->posicion = $lR->posicion + 1;
+				$lR->save();
+			}
+			$posicionLinea->posicion = $nuevaPosicion;
+			$posicionLinea->save();
+		}
+
+
+		return Response::json('ok');
+		//return Response::json( array('id_factura' => $id_factura, 'id' => Input::get('id'), 'index' => Input::get('index')) );
 	}
 
 	public function resumen(){
