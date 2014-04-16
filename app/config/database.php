@@ -76,7 +76,7 @@ return array(
 			'host'      => 'localhost',
 			'database'  => 'intropcfacturam',
 			'username'  => 'root',
-			'password'  => 'ipc*2014',
+			'password'  => '260287',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',
